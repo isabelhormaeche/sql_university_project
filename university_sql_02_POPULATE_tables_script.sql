@@ -16,6 +16,13 @@ VALUES ( "REACT");
 INSERT INTO courses(courses_title)
 VALUES ( "SQL_DB"); 
 
+
+-- Add one more course (7)
+
+INSERT INTO courses(courses_title)
+VALUES ( "REDIS"); 
+
+
 SELECT *
 FROM courses;
 
@@ -68,14 +75,23 @@ VALUES ("Student_10", "student_10@demo.com");
 
 ROLLBACK;
 
+-- Add two more students
+
+INSERT INTO students(students_name, students_email_address)
+VALUES 
+("Student_11", "student_11@demo.com"),
+("Student_12", "student_12@demo.com");
+
 SELECT *
 FROM students;
 
+
+
 -- POPULATE GRADES TABLE:
 
--- (3) professors, (6) courses, (10) students 
+-- (3) professors, (6+1) courses, (10+2) students 
 -- 		Jordan (professor_id:1)-> courses_id: 1,5,6
--- 		Joaquin (professor_id:2) -> courses_id: 2, 4
+-- 		Joaquin (professor_id:2) -> courses_id: 2, 4 + 7
 -- 		Carlos (professor_id:3)-> courses_id: 3
 
 -- 		NOTE: POPULATE grades_grade, further below, using RANDOM grades.
@@ -157,6 +173,21 @@ ROLLBACK;
 
 SELECT *
 FROM grades;
+
+-- 	Add one more course (REDIS) and grades given by professors_name = "Joaquin" (professor_id:2) -> courses_id: (2, 4) + 7
+
+INSERT INTO grades(grades_professors_id, grades_courses_id,  grades_students_id, grades_grade)
+VALUES
+(2,2,11, 98),
+(2,4,11, 90),
+(2,7,11, 96);
+
+INSERT INTO grades(grades_professors_id, grades_courses_id,  grades_students_id, grades_grade)
+VALUES
+(2,2,12, 95),
+(2,4,12, 81),
+(2,7,12, 75);
+
 
 -- POPULATE grades_grade with RANDOM values from 0 to 100:
 
